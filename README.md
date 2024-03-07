@@ -1,0 +1,2 @@
+# Supervised Learning
+This archive contains the finalized projects completed during the 2022-2023 session of the "[Supervised Learning](https://www.ucl.ac.uk/module-catalogue/modules/supervised-learning-COMP0078)" module.
