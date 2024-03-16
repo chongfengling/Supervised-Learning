@@ -161,16 +161,18 @@ We determined the optimal k as a function of the number of training points $(m)$
 ### Kernel perceptron
 We applied One-versus-rest method to train our k-class perceptron.
 
-$$
-\begin{array}{|l|l|}
-\hline & \text { Algorithm for one-vs-rest: } \\
-\hline \text { Input: } & x_1, y_1, \ldots,\left(x_m, y_m\right) \in\left(R^n,-1,+1\right)^m \\
-\hline \text { Initialization: } & \alpha_0=0 \text { for all classifier } \\
-\hline \text { Prediction: } & \text { Upon receiving the } t_{t h} \text { instance } x_t, \text { predict } \hat{y}_t=\operatorname{sign}\left(\sum_{i=0}^{t-1} \alpha_i K\left(x_i, x_t\right)\right) \text { for all classifier } \\
-\hline \text { Update: } & \text { if } \hat{y}_t \neq y_t \text { then } \alpha_t=\alpha_t+y_t \\
-\hline
-\end{array}
-$$
+<center>
+    <div style="display: inline-block;">
+        <img style="border-radius: 0.3125em;
+        box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
+        src="asserts/2-0.png">
+        <br>
+        <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+        display: inline-block;
+        color: #999;
+        padding: 2px;">
+</center>
+
 with kernel $K\left(x_i, x_t\right)$
 
 #### with the polynomial kernel $K_d(\boldsymbol{p}, \boldsymbol{q})=(\boldsymbol{p} \cdot \boldsymbol{q})^d$
