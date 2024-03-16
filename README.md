@@ -1,10 +1,10 @@
-## Supervised Learning
-This archive contains the finalized projects completed during the 2022-2023 session of the "[Supervised Learning](https://www.ucl.ac.uk/module-catalogue/modules/supervised-learning-COMP0078)" module. The first coursework talks about linear regression and KNN while the second covers Kernel Perceptron,
+# Supervised Learning
+This archive contains the finalized projects completed during the 2022-2023 session of the "[Supervised Learning](https://www.ucl.ac.uk/module-catalogue/modules/supervised-learning-COMP0078)" module. The first coursework talks about linear regression and KNN while the second trained a perceptron to classify handwritten digit numbers.
 
 Following are the brief description of two coursework. See corresponding code and report for more information.
-#### CW1
+## CW1
 
-###### Linear Regression
+### Linear Regression
 
 We first illustrated the phenomena of **overfitting, underfitting** and hyper-parameter with polynomial basis and $sin(k\pi x)$ basis. 
 
@@ -41,11 +41,11 @@ def coef_sin_reg(x, y, k):
     </div>
 </center>
 
-###### Kernel methods
+### Kernel methods
 
 Then we extended linear regression with kernel method on predict the median house price of [Boston](http://www.cs.toronto.edu/~delve/data/boston/bostonDetail) with one or more attributes.
 
-###### kernel Ridge Regression
+### kernel Ridge Regression
 
 We Researched KRR with the Gaussian Kernel and performed it on predicting the median house price of [Boston](http://www.cs.toronto.edu/~delve/data/boston/bostonDetail). KRR shows its advance on the nonlinear data set.
 
@@ -104,7 +104,7 @@ def train_kernel_ridge(x_train, y_train, sigma, gam):
 </center>
 
 
-###### k-Nearest Neighbors
+### k-Nearest Neighbors
 
 We implemented the k-NN algorithm and explore its performance as a function of k.
 
@@ -156,3 +156,70 @@ We determined the optimal k as a function of the number of training points $(m)$
         </div>
     </div>
 </center>
+
+## CW2
+### Kernel perceptron
+We applied One-versus-rest method to train our k-class perceptron.
+
+$$
+\begin{array}{|l|l|}
+\hline & \text { Algorithm for one-vs-rest: } \\
+\hline \text { Input: } & x_1, y_1, \ldots,\left(x_m, y_m\right) \in\left(R^n,-1,+1\right)^m \\
+\hline \text { Initialization: } & \alpha_0=0 \text { for all classifier } \\
+\hline \text { Prediction: } & \text { Upon receiving the } t_{t h} \text { instance } x_t, \text { predict } \hat{y}_t=\operatorname{sign}\left(\sum_{i=0}^{t-1} \alpha_i K\left(x_i, x_t\right)\right) \text { for all classifier } \\
+\hline \text { Update: } & \text { if } \hat{y}_t \neq y_t \text { then } \alpha_t=\alpha_t+y_t \\
+\hline
+\end{array}
+$$
+with kernel $K\left(x_i, x_t\right)$
+
+#### with the polynomial kernel $K_d(\boldsymbol{p}, \boldsymbol{q})=(\boldsymbol{p} \cdot \boldsymbol{q})^d$
+We use 80% of the dataset to train our model and test it on the rest. While training, we split 10% from training dataset as the validating dataset to determine the number of epoch. The parameter of model is updated only during the training process.
+
+<center>
+    <div style="display: inline-block;">
+        <img style="border-radius: 0.3125em;
+        box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
+        src="asserts/2-1.png">
+        <br>
+        <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+        display: inline-block;
+        color: #999;
+        padding: 2px;">
+</center>
+
+Also we found the best $d^*=6.0500 \pm 1.0235$ with mean test error rate $0.0438 \pm 0.0043$ by cross-validation.
+
+<center>
+    <div style="display: inline-block;">
+        <img style="border-radius: 0.3125em;
+        box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
+        src="asserts/2-2.png">
+        <br>
+        <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+        display: inline-block;
+        color: #999;
+        padding: 2px;">
+            Five hardest digits to classify.
+        </div>
+    </div>
+</center>
+
+#### with the Gaussian kernel $K(\boldsymbol{p}, \boldsymbol{q})=e^{-c\|\boldsymbol{p}-\boldsymbol{q}\|^2}$
+
+The parameter c is chosen from set $S = {0.01, 0.1, 1, 10, 100}$. By repeating the first problem, we have a
+training error rate and testing error rate for each parameter c. As we can see, when c = 0.01 we can get a
+local minimum of testing error rate.
+
+<center>
+    <div style="display: inline-block;">
+        <img style="border-radius: 0.3125em;
+        box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
+        src="asserts/2-3.png">
+        <br>
+        <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+        display: inline-block;
+        color: #999;
+        padding: 2px;">
+</center>
+
